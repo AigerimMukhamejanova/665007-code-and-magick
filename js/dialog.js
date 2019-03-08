@@ -1,17 +1,13 @@
 /* eslint strict: ['error', 'global']*/
 'use strict';
 
-var shopElement = document.querySelector('.setup-artifacts-shop');
-var draggedItem = null;
-var artifactsElement = document.querySelector('.setup-artifacts');
 
 (function () {
-
   var setupDialogElement = document.querySelector('.setup');
   var dialogHandler = setupDialogElement.querySelector('.upload');
   var submitElement = document.querySelector('.setup-submit');
   var closeElement = document.querySelector('.setup-close');
-
+  
   // обработаем событие начала перетаскивания нашего диалога mousedown
   dialogHandler.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -59,13 +55,13 @@ var artifactsElement = document.querySelector('.setup-artifacts');
         };
         dialogHandler.addEventListener('click', onClickPreventDefault);
       }
-
     };
 
     // Добавим обработчики события передвижения мыши и отпускания кнопки мыши
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
+    
   // При повторном открытии/закрытии диалога, положение диалога должно сбрасываться на изначальное
   var onCloseDialog = function () {
     setupDialogElement.style.top = null;
@@ -75,33 +71,9 @@ var artifactsElement = document.querySelector('.setup-artifacts');
   submitElement.addEventListener('click', onCloseDialog);
   closeElement.addEventListener('click', onCloseDialog);
 
+  var onEscCLoseDialog = function (evt) {
+    window.util.isEscEvent(evt,onCloseDialog);
+  };
+  document.addEventListener('keydown', onEscCLoseDialog);
+    
 })();
-
-// артефакты и рюкзак
-shopElement.addEventListener('dragstart', function (evt) {
-  if (evt.target.tagName.toLowerCase() === 'img') {
-    draggedItem = evt.target;
-    evt.dataTransfer.setData('text/plain', evt.target.alt);
-  }
-});
-
-artifactsElement.addEventListener('dragover', function (evt) {
-  evt.preventDefault();
-  return false;
-});
-
-artifactsElement.addEventListener('drop', function (evt) {
-  evt.target.style.backgroundColor = '';
-  evt.target.appendChild(draggedItem);
-});
-
-
-artifactsElement.addEventListener('dragenter', function (evt) {
-  evt.target.style.backgroundColor = 'yellow';
-  evt.preventDefault();
-});
-
-artifactsElement.addEventListener('dragleave', function (evt) {
-  evt.target.style.backgroundColor = '';
-  evt.preventDefault();
-});

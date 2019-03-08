@@ -84,15 +84,15 @@
   setupOpenElement.addEventListener('click', function () {
     openPopup();
   });
-    
+
   setupOpenElement.addEventListener('keydown', function (evt) {
     window.util.isEnterEvent(evt, openPopup);
   });
-    
+
   setupCloseElement.addEventListener('click', function () {
     closePopup();
   });
-    
+
   setupCloseElement.addEventListener('keydown', function (evt) {
     window.util.isEnterEvent(evt, closePopup);
   });

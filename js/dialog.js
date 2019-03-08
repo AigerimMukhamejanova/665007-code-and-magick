@@ -7,7 +7,7 @@
   var dialogHandler = setupDialogElement.querySelector('.upload');
   var submitElement = document.querySelector('.setup-submit');
   var closeElement = document.querySelector('.setup-close');
-  
+
   // обработаем событие начала перетаскивания нашего диалога mousedown
   dialogHandler.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -61,7 +61,7 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
-    
+
   // При повторном открытии/закрытии диалога, положение диалога должно сбрасываться на изначальное
   var onCloseDialog = function () {
     setupDialogElement.style.top = null;
@@ -72,8 +72,8 @@
   closeElement.addEventListener('click', onCloseDialog);
 
   var onEscCLoseDialog = function (evt) {
-    window.util.isEscEvent(evt,onCloseDialog);
+    window.util.isEscEvent(evt, onCloseDialog);
   };
   document.addEventListener('keydown', onEscCLoseDialog);
-    
+
 })();
